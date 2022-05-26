@@ -2611,9 +2611,17 @@ class _ProxyConfiguration {
         if (proxy.startsWith(PROXY_PREFIX)) {
           String username;
           String password;
+          String protocol;
           // Skip the "PROXY " prefix.
           proxy = proxy.substring(PROXY_PREFIX.length).trim();
           // Look for proxy authentication.
+
+          int pos = proxy.indexOf("://");
+          if (pos >= 0) {
+            protocol = proxy.substring(0, pos + 3);
+            proxy = proxy.substring(pos + 3);
+          }
+
           int at = proxy.indexOf("@");
           if (at != -1) {
             String userinfo = proxy.substring(0, at).trim();
@@ -2642,7 +2650,7 @@ class _ProxyConfiguration {
             throw HttpException("Invalid proxy configuration $configuration, "
                 "invalid port '$portString'");
           }
-          proxies.add(_Proxy(host, port, username, password));
+          proxies.add(_Proxy(protocol, host, port, username, password));
         } else if (proxy.trim() == DIRECT_PREFIX) {
           proxies.add(_Proxy.direct());
         } else {
@@ -2658,16 +2666,19 @@ class _ProxyConfiguration {
 }
 
 class _Proxy {
+  final String protocol;
   final String host;
   final int port;
   final String username;
   final String password;
   final bool isDirect;
 
-  const _Proxy(this.host, this.port, this.username, this.password)
+  const _Proxy(
+      this.protocol, this.host, this.port, this.username, this.password)
       : isDirect = false;
   const _Proxy.direct()
-      : host = null,
+      : protocol = null,
+        host = null,
         port = null,
         username = null,
         password = null,
