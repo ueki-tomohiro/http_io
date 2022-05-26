@@ -355,7 +355,7 @@ Future<Null> testProxy() {
         if (Platform.operatingSystem == "windows") {
           proxy = [
             "PROXY localhost:${proxyServer.port}",
-            "PROXY localhost:${proxyServer.port}; PROXY hede.hule.hest:8080",
+            "PROXY localhost:${proxyServer.port}; PROXY https://user:user@hede.hule.hest:8080",
             "PROXY localhost:${proxyServer.port}",
             ""
                 " PROXY localhost:${proxyServer.port}",
@@ -365,7 +365,7 @@ Future<Null> testProxy() {
         } else {
           proxy = [
             "PROXY localhost:${proxyServer.port}",
-            "PROXY localhost:${proxyServer.port}; PROXY hede.hule.hest:8080",
+            "PROXY localhost:${proxyServer.port}; PROXY https://user:user@hede.hule.hest:8080",
             "PROXY hede.hule.hest:8080; PROXY localhost:${proxyServer.port}",
             "PROXY hede.hule.hest:8080; PROXY hede.hule.hest:8181;"
                 " PROXY localhost:${proxyServer.port}",
@@ -432,7 +432,7 @@ Future<Null> testProxyChain() {
         if (Platform.operatingSystem == "windows") {
           proxy = [
             "PROXY localhost:${proxyServer1.port}",
-            "PROXY localhost:${proxyServer1.port}; PROXY hede.hule.hest:8080",
+            "PROXY localhost:${proxyServer1.port}; PROXY https://user:user@hede.hule.hest:8080",
             "PROXY localhost:${proxyServer1.port}",
             "PROXY localhost:${proxyServer1.port}",
             "DIRECT",
@@ -441,7 +441,7 @@ Future<Null> testProxyChain() {
         } else {
           proxy = [
             "PROXY localhost:${proxyServer1.port}",
-            "PROXY localhost:${proxyServer1.port}; PROXY hede.hule.hest:8080",
+            "PROXY localhost:${proxyServer1.port}; PROXY https://user:user@hede.hule.hest:8080",
             "PROXY hede.hule.hest:8080; PROXY localhost:${proxyServer1.port}",
             "PROXY hede.hule.hest:8080; PROXY hede.hule.hest:8181;"
                 " PROXY localhost:${proxyServer1.port}",
