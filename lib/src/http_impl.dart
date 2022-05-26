@@ -2650,7 +2650,6 @@ class _ProxyConfiguration {
             throw HttpException("Invalid proxy configuration $configuration, "
                 "invalid port '$portString'");
           }
-          print([scheme, host, port, username, password]);
           proxies.add(_Proxy(scheme, host, port, username, password));
         } else if (proxy.trim() == DIRECT_PREFIX) {
           proxies.add(_Proxy.direct());
